@@ -6,7 +6,17 @@ Description: Show address fields for free levels also with Paid Memberships Pro
 Version: .4
 Author: Paid Memberships Pro
 Author URI: https://www.paidmembershipspro.com/
+Text Domain: pmpro-address-for-free-levels
+Domain Path: /languages
 */
+
+/*
+	Load plugin textdomain.
+*/
+function pmproaffl_load_textdomain() {
+	load_plugin_textdomain( 'pmpro-address-for-free-levels', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
+  }
+  add_action( 'init', 'pmproaffl_load_textdomain' );
  
 /**
  * Keep address fields shown on checkout page
@@ -37,8 +47,7 @@ function pmproaffl_pmpro_checkout_boxes_require_address() {
     			{
     			?>
     				//change heading
-    				jQuery('#pmpro_billing_address_fields th').html('Address');
-    			<?php
+					jQuery('#pmpro_billing_address_fields th').html(<?php esc_html_e('Address', 'pmpro-address-for-free-levels');?>);    			<?php
     			}
     		?>
     	});
@@ -208,8 +217,8 @@ add_action("pmpro_after_checkout", "pmproaffl_pmpro_after_checkout");
 function pmproaffl_plugin_row_meta($links, $file) {
 	if(strpos($file, 'pmpro-address-for-free-levels.php') !== false) {
 		$new_links = array(
-			'<a href="' . esc_url('https://www.paidmembershipspro.com/add-ons/capture-name-address-free-levels-offsite-gateway/')  . '" title="' . esc_attr( __( 'View Documentation', 'pmpro' ) ) . '">' . __( 'Docs', 'pmpro' ) . '</a>',
-			'<a href="' . esc_url('https://paidmembershipspro.com/support/') . '" title="' . esc_attr( __( 'Visit Customer Support Forum', 'pmpro' ) ) . '">' . __( 'Support', 'pmpro' ) . '</a>',
+			'<a href="' . esc_url('https://www.paidmembershipspro.com/add-ons/capture-name-address-free-levels-offsite-gateway/')  . '" title="' . esc_attr( __( 'View Documentation', 'pmpro-address-for-free-levels' ) ) . '">' . __( 'Docs', 'pmpro-address-for-free-levels' ) . '</a>',
+			'<a href="' . esc_url('https://paidmembershipspro.com/support/') . '" title="' . esc_attr( __( 'Visit Customer Support Forum', 'pmpro-address-for-free-levels' ) ) . '">' . __( 'Support', 'pmpro-address-for-free-levels' ) . '</a>',
 		);
 		$links = array_merge($links, $new_links);
 	}
